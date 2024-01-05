@@ -1,0 +1,24 @@
+.info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.info a {
+  padding: 5px;
+  cursor: pointer;
+  background-color: #fff;
+  color: black;
+}
+.discountValue {
+  position: absolute;
+  user-select: none;
+  top: 34px;
+  left: 40px;
+}
+.w17 {
+  width: 17% !important;
+}
+.w29 {
+  width: 29% !important;
+}
