@@ -42,16 +42,20 @@ const List = () => {
   );
   const [province2, setProvince2] = useState("");
   const [startLocation2, setStartLocation2] = useState("");
-  const [startDate, setStartDate] = useState(location.state.startDate);
-  const [numberOfDay, setNumberOfDay] = useState(location.state.numberOfDay);
+  const [startDate, setStartDate] = useState(location?.state?.startDate);
+  const [numberOfDay, setNumberOfDay] = useState(location?.state?.numberOfDay);
   const [numberOfAdult, setNumberOfAdult] = useState(
-    location.state.numberOfAdult
+    location?.state?.numberOfAdult
   );
   const [numberOfChildren, setNumberOfChildren] = useState(
-    location.state.numberOfChildren
+    location?.state?.numberOfChildren
   );
-  const [numberOfRoom, setNumberOfRoom] = useState(location.state.numberOfRoom);
-  const [selectedDate, setSelectedDate] = useState(location.state.selectedDate);
+  const [numberOfRoom, setNumberOfRoom] = useState(
+    location?.state?.numberOfRoom
+  );
+  const [selectedDate, setSelectedDate] = useState(
+    location?.state?.selectedDate
+  );
   const [isHeaderVisible, setHeaderVisible] = useState(true);
   const [orderBy, setOrderBy] = useState("price");
   const [orderDirection, setOrderDirection] = useState("asc");
@@ -201,8 +205,8 @@ const List = () => {
           numberOfRoom,
           priceRoom: priceRoom,
           priceCar: priceCar,
-          vehicleId: tours[0]?.vehicleList[0].evehicleId,
-          hotelId: tours[0]?.hotelList[0].ehotelId,
+          vehicleId: tours[0]?.vehicleList[0]?.evehicleId,
+          hotelId: tours[0]?.hotelList[0]?.ehotelId,
           roomIdList,
         },
       });
@@ -273,7 +277,7 @@ const List = () => {
                     searchProvince={
                       startLocation2
                         ? startLocation2
-                        : location.state.startLocation.province
+                        : location?.state?.startLocation?.province
                     }
                     onSelectLocation3={handleSelectLocation3}
                     pickProvince
@@ -286,7 +290,7 @@ const List = () => {
                     searchProvince={
                       province2
                         ? province2
-                        : location.state.endLocation.province
+                        : location?.state?.endLocation?.province
                     }
                     onSelectLocation={handleSelectLocation}
                     pickProvince
@@ -480,7 +484,7 @@ const List = () => {
                               loading="lazy"
                             />
 
-                            {item.tour?.discount.isDiscount ? (
+                            {item?.tour?.discount?.isDiscount ? (
                               <div className="tour-item__image-inner__top">
                                 <span className=" position-relative">
                                   <svg
@@ -513,7 +517,7 @@ const List = () => {
                                     </defs>
                                   </svg>
                                   <span className="ms-1">
-                                    -{item.tour?.discount.discountValue}%
+                                    -{item?.tour?.discount?.discountValue}%
                                   </span>
                                 </span>
                               </div>
@@ -535,45 +539,45 @@ const List = () => {
                           <p className="tour-item__date mb-1">
                             Thời gian thích hợp:{" "}
                             {validateOriginalDate(
-                              item.tour?.reasonableTime.startDate
+                              item?.tour?.reasonableTime?.startDate
                             )}{" "}
                             đến{" "}
                             {validateOriginalDate(
-                              item.tour?.reasonableTime.endDate
+                              item?.tour?.reasonableTime?.endDate
                             )}
                           </p>
                           <h3 className="card-text tour-item__title mb-1">
-                            {item.tour?.tourTitle}
+                            {item?.tour?.tourTitle}
                           </h3>
                           <div className="tour-item__code">
                             <div>Đối tượng thích hợp:</div>
                             <span className="font-weight-bold">
                               {" "}
-                              {item.tour?.suitablePerson}
+                              {item?.tour?.suitablePerson}
                             </span>
                           </div>
                           <p className="tour-item__departure mb-2">
                             Mã tour:{" "}
                             <span className="font-weight-bold">
-                              {item.tour?.tourId}
+                              {item?.tour?.tourId}
                             </span>
                           </p>
                           <p className="tour-item__departure mb-2">
                             Điểm đến:{" "}
                             <span className="font-weight-bold">
-                              {item.tour?.address.province}
+                              {item?.tour?.address?.province}
                             </span>
                           </p>
                           <p className="tour-item__departure mb-2">
                             Khách sạn:{" "}
                             <span className="font-weight-bold">
-                              {item.hotelList[0]?.ehotelName}
+                              {item?.hotelList[0]?.ehotelName}
                             </span>
                           </p>
                           <p className="tour-item__departure mb-2">
                             Nhà xe:{" "}
                             <span className="font-weight-bold">
-                              {item.vehicleList[0].evehicleName}
+                              {item?.vehicleList[0]?.evehicleName}
                             </span>
                           </p>{" "}
                           <p className="tour-item__departure mb-2">
@@ -581,7 +585,7 @@ const List = () => {
                             <span className="font-weight-bold">
                               {formatDate(startDate)}
                             </span>{" "}
-                            - {item.tour?.numberOfDay} ngày
+                            - {item?.tour?.numberOfDay} ngày
                           </p>
                           <div className="tour-item__price mb-2 w-100">
                             <div className="tour-item__price__wrapper">
@@ -596,7 +600,7 @@ const List = () => {
                                   )}
                                   ₫
                                 </span>
-                                {item.tour?.discount.isDiscount ? (
+                                {item?.tour?.discount?.isDiscount ? (
                                   <span className="tour-item__price--old pe-2 mb-0">
                                     {formatCurrencyWithoutD(
                                       item?.tourPriceNotDiscount +
@@ -615,7 +619,7 @@ const List = () => {
                                     className=" btn-sm btnOptionTour"
                                     onClick={() =>
                                       handleViewDetailOrPayNow(
-                                        item.tour?.tourId,
+                                        item?.tour?.tourId,
                                         2,
                                         item?.hotelList[0]?.optionList[0]
                                           ?.totalPrice,
@@ -635,7 +639,7 @@ const List = () => {
                                   className="btn-block"
                                   onClick={() =>
                                     handleViewDetailOrPayNow(
-                                      item.tour?.tourId,
+                                      item?.tour?.tourId,
                                       1,
                                       item?.hotelList[0]?.optionList[0]
                                         ?.totalPrice,
@@ -697,21 +701,21 @@ const List = () => {
                       <div
                         className="card destination-item cursor-pointer"
                         onClick={() =>
-                          handleClickProvince(destination.province)
+                          handleClickProvince(destination?.province)
                         }
                       >
                         <div className="mb-3 position-relative destination-item__image">
                           <div>
                             <img
-                              src={destination.imageUrl}
+                              src={destination?.imageUrl}
                               className="card-img-top1 img-fluid"
-                              alt={destination.title}
+                              alt={destination?.title}
                             />
                           </div>
                         </div>
                         <div className="card-body">
                           <div className="card-title destination-item__title">
-                            {destination.title}
+                            {destination?.title}
                           </div>
                         </div>
                       </div>

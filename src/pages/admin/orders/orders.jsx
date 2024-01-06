@@ -360,27 +360,19 @@ const OrderList = () => {
                             <span>Tour không sử dụng mã giảm giá.</span>
                           </li>
                         )}
-                        {order.discount.discountTourValue > 0 ? (
-                          <li>
-                            Giá tour được giảm:{" "}
-                            <span>
-                              {" "}
-                              {formatCurrencyWithoutD(
-                                order.discount.discountTourValue
-                              )}
-                              đ
-                            </span>
-                          </li>
-                        ) : (
-                          <li>
-                            <span>Tour không có giảm giá.</span>
-                          </li>
-                        )}
                         <li>
-                          Tổng cộng:{" "}
+                          Giá gốc của tour:{" "}
                           <span>
                             {" "}
-                            {formatCurrencyWithoutD(order.finalPrice)}đ
+                            {formatCurrencyWithoutD(order?.totalPrice)}đ
+                          </span>
+                        </li>
+
+                        <li>
+                          Giá đã được giảm:{" "}
+                          <span>
+                            {" "}
+                            {formatCurrencyWithoutD(order?.finalPrice)}đ
                           </span>
                         </li>
                       </ul>
@@ -400,7 +392,7 @@ const OrderList = () => {
                               {order.orderDetail.tourDetail.tourTitle}
                             </span>
                             <div className="">
-                              Mã tour: <span>{order.orderDetail.tourId}</span>
+                              Mã tour: <span>{order?.orderDetail?.tourId}</span>
                             </div>
                             <div
                               className="btn-block1"

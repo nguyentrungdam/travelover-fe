@@ -49,8 +49,8 @@ const TourDetail = () => {
   const numberOfAdult = state ? state.numberOfAdult : 1;
   const numberOfChildren = state ? state.numberOfChildren : 1;
   const numberOfRoom = state ? state.numberOfRoom : 1;
-  const priceRoom2 = state ? state.priceRoom : 0;
-  const priceCar2 = state ? state.priceCar : 0;
+  const priceRoom2 = state ? Math.round(state.priceRoom) : 0;
+  const priceCar2 = state ? Math.round(state.priceCar) : 0;
   const [activeDay, setActiveDay] = useState(null);
   const tomorrow = addDays(new Date(), 2);
   const fetchData = async () => {
@@ -155,7 +155,7 @@ const TourDetail = () => {
   const [showCar, setShowCar] = useState(false);
   const [selectedHotel, setSelectedHotel] = useState(null);
   const [selectedCar, setSelectedCar] = useState(null);
-  const [priceRoom, setPriceRoom] = useState(priceRoom2);
+  const [priceRoom, setPriceRoom] = useState(Math.round(priceRoom2));
   const [priceCar, setPriceCar] = useState(priceCar2);
   console.log(selectedCar);
 
@@ -293,9 +293,17 @@ const TourDetail = () => {
           ? selectedHotel.ehotelId
           : tours[0]?.hotelList[0].ehotelId,
         roomIdList,
+        eHotelName: selectedHotel
+          ? selectedHotel?.ehotelName
+          : tours[0]?.hotelList[0]?.ehotelName,
+        eCarName: selectedCar
+          ? selectedCar?.evehicleName
+          : tours[0]?.vehicleList[0]?.evehicleName,
       },
     });
   };
+  console.log(priceRoom);
+  console.log(priceCar);
   return (
     <div>
       <ScrollToTop />
@@ -340,7 +348,7 @@ const TourDetail = () => {
                 <p className="mb-0">
                   <span className="price-total ">
                     {formatCurrencyWithoutD(
-                      tours[0]?.tourPrice + priceRoom + priceCar
+                      Math.round(tours[0]?.tourPrice + priceRoom + priceCar)
                     )}
                     ₫{" "}
                   </span>{" "}
@@ -475,11 +483,11 @@ const TourDetail = () => {
                       alt=""
                     />
                     <label>Khách sạn</label>
-                    {/* <p>
-                      {tours[0]?.hotelList[0].ehotelName
-                        ? tours[0]?.hotelList[0].ehotelName
-                        : selectedHotel?.ehotelName}{" "}
-                    </p> */}
+                    <p>
+                      {selectedHotel
+                        ? selectedHotel?.ehotelName
+                        : tours[0]?.hotelList[0]?.ehotelName}{" "}
+                    </p>
                   </div>
                   <div className="item">
                     <img
@@ -488,11 +496,11 @@ const TourDetail = () => {
                       alt=""
                     />
                     <label>Nhà xe</label>
-                    {/* <p>
-                      {tours[0]?.vehicleList[0].evehicleName
-                        ? tours[0]?.vehicleList[0].evehicleName
-                        : selectedCar?.evehicleName}{" "}
-                    </p> */}
+                    <p>
+                      {selectedCar
+                        ? selectedCar?.evehicleName
+                        : tours[0]?.vehicleList[0]?.evehicleName}{" "}
+                    </p>
                   </div>
                 </div>
                 <div className="search__bar mb-4 position-relative">
@@ -835,7 +843,9 @@ const TourDetail = () => {
                         <td>Tổng cộng</td>
                         <td className="t-price">
                           {formatCurrencyWithoutD(
-                            tours[0]?.tourPrice + priceRoom + priceCar
+                            Math.round(
+                              tours[0]?.tourPrice + priceRoom + priceCar
+                            )
                           )}
                           ₫
                         </td>
